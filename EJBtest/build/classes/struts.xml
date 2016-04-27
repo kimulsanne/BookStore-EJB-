@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">  
+<struts>  
+  	<constant name="struts.action.excludePattern" value="/game*,^ws://.$"/>
+    <include file="struts-default.xml" />  
+    <package name="Login" extends="struts-default" namespace="/">  
+        <action name="Login" class="com.kim.action.LoginAction">  
+            <result name="input">/login.jsp</result>  
+            <result name="success">/success.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package>  
+    
+    <package name="Register" extends="struts-default" namespace="/">  
+        <action name="Register" class="com.kim.action.RegisterAction">  
+            <result name="input">/register.jsp</result>  
+            <result name="success">/success.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package> 
+    <package name="ShowBook" extends="struts-default" namespace="/">  
+        <action name="ShowBook" class="com.kim.action.ShowBookAction">  
+            <result name="input">/register.jsp</result>  
+            <result name="success">/showbook.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package>
+	<package name="ShowUser" extends="struts-default" namespace="/">  
+        <action name="ShowUser" class="com.kim.action.ShowUserAction">  
+            <result name="input">/register.jsp</result>  
+            <result name="success">/admin.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package>     
+    
+	<package name="AddToCart" extends="struts-default" namespace="/">  
+        <action name="AddToCart" class="com.kim.action.AddToCartAction">  
+            <result name="input">/register.jsp</result>  
+            <result name="success">/showcart.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package>   
+    
+	<package name="BuyBook" extends="struts-default" namespace="/">  
+        <action name="BuyBook" class="com.kim.action.BuyBookAction">  
+            <result name="input">/showcart.jsp</result>  
+            <result name="success">/success.jsp</result>  
+            <result name="error">/fail.jsp</result>  
+        </action>  
+    </package>  
+</struts>  
