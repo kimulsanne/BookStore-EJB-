@@ -37,19 +37,21 @@ public class BuyBookAction extends ActionSupport{
 			HttpServletRequest request = ServletActionContext.getRequest(); 	   
 	    	CartService cart=(CartService) request.getSession().getAttribute("cart");
 	    	
-	    	//InitialContext ctx = new InitialContext();
-	    	/*Hashtable<String, String> env = (Hashtable<String, String>) context .getEnvironment();
-	    	System.out.println(env);*/
-			QueueConnectionFactory factory
+
+			/*QueueConnectionFactory factory
 			  = (QueueConnectionFactory)context.lookup("ConnectionFactory");
 			Queue dest = (Queue)context.lookup("queue/test");
 			QueueConnection cnn = factory.createQueueConnection();
 			QueueSession session = cnn.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
 			QueueSender sender = session.createSender(dest);
-			ObjectMessage msg = session.createObjectMessage();
-			
-	        User user = (User) request.getSession().getAttribute("user");
-	        List<Book> list = null;
+			ObjectMessage msg = session.createObjectMessage();*/
+	    	//BillingServiceBean billingService = (BillingServiceBean) context.lookup("ejb:/BookstoreWeb//BillingServiceBean!com.kim.service.BillingService");
+	    	CartService mcp=(CartService) request.getSession().getAttribute("cart");	
+	        if (mcp==null) {	     
+	            mcp=(CartService) context.lookup("ejb:/BookstoreEJB//CartServiceBean!com.kim.service.CartService?stateful");
+	        } 
+	    	User user = (User) request.getSession().getAttribute("user");
+	        /*List<Book> list = null;
 			if (cart != null)
 				list = cart.listCart();
 			for (int i = 0; i < list.size(); i++) {
@@ -57,9 +59,11 @@ public class BuyBookAction extends ActionSupport{
 				billing.setQuantity(list.get(i).getQuantity());
 				billing.setUsername(user.getUsername());
 				billing.setBookname(list.get(i).getName());	
-				msg.setObject(billing);
+				
+				//msg.setObject(billing);
 				//billingService.addBilling(billing);
-			}					
+			}		*/
+	        mcp.buyBook(user.getUsername());
 			cart.deleteAllBook();		
 			request.getSession().setAttribute("info", "¹ºÂò³É¹¦!");
 			request.getSession().setAttribute("cart", cart);

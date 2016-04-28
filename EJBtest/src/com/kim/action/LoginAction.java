@@ -24,9 +24,6 @@ import org.apache.struts2.ServletActionContext;
 public class LoginAction extends ActionSupport{  
  
     private static final long serialVersionUID = 1L;  
-    private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String PROVIDER_URL = "remote://localhost:4447";
-    private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
     private User user;  
     public User getUser() {
 		return user;
@@ -38,12 +35,10 @@ public class LoginAction extends ActionSupport{
     public String execute() throws Exception {  
 		final Hashtable<String, String> jndiProperties = new Hashtable<String, String>();
 		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-		//jndiProperties.put(Context.PROVIDER_URL,"remote://localhost:4447");
-		
 		final Context context = new InitialContext(jndiProperties);
-		//context.removeFromEnvironment(Context.INITIAL_CONTEXT_FACTORY);
-		//context.addToEnvironment(Context.INITIAL_CONTEXT_FACTORY,"org.jboss.naming.remote.client.InitialContextFactory");
+		
     	Hashtable<String, String> env1 = (Hashtable<String, String>) context .getEnvironment();   	
+    	System.out.println("Login:");
     	System.out.println(env1);
 		
 		/*QueueConnectionFactory factory
