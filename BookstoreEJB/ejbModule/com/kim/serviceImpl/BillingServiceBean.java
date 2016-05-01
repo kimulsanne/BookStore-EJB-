@@ -31,8 +31,8 @@ public class BillingServiceBean implements MessageListener {
 			ObjectMessage message = (ObjectMessage)msg;
 			
 			Billing billing = (Billing)message.getObject();
-			billingEao.addBilling(billing);
-			System.out.println(billing.getBookname());
+			if (billing != null)
+				billingEao.addBilling(billing);		
 			
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
@@ -42,22 +42,4 @@ public class BillingServiceBean implements MessageListener {
 	}
 
 }
- /*
-@Stateless
-@Remote
-public class BillingServiceBean implements BillingService {
  
-    @EJB
-    private BillingEao billingEao;
-    
-    public BillingServiceBean() {
-        
-    }
-
-	@Override
-	public void addBilling(Billing billing) {
-		billingEao.addBilling(billing);
-	}
-
-}
-*/	

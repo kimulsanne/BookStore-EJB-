@@ -59,6 +59,7 @@ public class CartServiceBean implements CartService{
 
 	@Override
 	public void buyBook(String userName) throws Exception {
+		System.out.println("¬Ú È");
 		final Hashtable<String, String> jndiProperties = new Hashtable<String, String>();
 		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
 		final Context context = new InitialContext(jndiProperties);

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
-http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
-<!-- Name属性用于定义持久化单元的名字 (name必选,空值也合法) -->
-<persistence-unit name="DS" transaction-type="JTA">
-<provider>org.hibernate.ejb.HibernatePersistence</provider>
-<!-- Jta-data-source 用于指定持久化提供商使用的JTA数据源的全局JNDI名称(可选) -->
-<jta-data-source>java:jboss/datasources/MysqlDS</jta-data-source>
-<properties>
-<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-</properties>
-</persistence-unit>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+		http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+		
+	<!-- Name属性用于定义持久化单元的名字 (name必选,空值也合法) -->
+	<persistence-unit name="DS" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<!-- Jta-data-source 用于指定持久化提供商使用的JTA数据源的全局JNDI名称(可选) -->
+		<jta-data-source>java:jboss/datasources/MysqlDS</jta-data-source>
+		
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		</properties>
+	</persistence-unit>
 </persistence>	
