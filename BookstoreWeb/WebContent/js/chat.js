@@ -1,29 +1,22 @@
 $(function(){
 	var socket = null;
-	var username = $("#user").attr("class");
-	var ok=false;
+	var username = "";
 	function parseObj(strData){//转换对象
 	    return (new Function( "return " + strData ))();
 	};
 	//创建socket对象
-	socket = new WebSocket("ws://localhost:8088/EJBtest/game");	
-	//连接创建后调用
-	
-	/*socket.onopen = function() {
-		//socket.send("欢迎: " + username + " \n");
-		$("#textarea").append("欢迎: " + username + " \n");
-		ok=true;
-	};*/
+	socket = new WebSocket("ws://localhost:8088/BookstoreWeb/game");	
 
 	//接收到服务器消息后调用
 	socket.onmessage = function(message) {		
-		var data=parseObj(message.data);
+		var data=parseObj(message.data);		
 		if(data.type=="chat"){			
-			$("#textarea").append(username + ": " + data.msg + "\n");
+			$("#textarea").append(data.name + ": " + data.msg + "\n");
 		}else if(data.type=="join"){			 
-			$("#textarea").append("欢迎: " + username + " \n");
+			$("#textarea").append("欢迎: " + data.name + " \n");
 		}
 	};
+	
 	//关闭连接的时候调用
 	socket.onclose = function(){
 		alert("close");
@@ -32,6 +25,7 @@ $(function(){
 	socket.onerror = function() {
 		alert("error");
 	};
+	
 	$("#sendButton").click(function() {
 		var joinMsg = {};
 		joinMsg.type="chat";
@@ -40,11 +34,20 @@ $(function(){
 		var message=JSON.stringify(joinMsg);
 		socket.send(message);
 	});
+	
 	$("#joinButton").click(function() {
-		var joinMsg = {};
-		joinMsg.type="join";
-		joinMsg.name=username;
-		var msg=JSON.stringify(joinMsg);
-		socket.send(msg);	
+		$(this).attr("disabled", true);
+		$("#sendButton").attr("disabled", false);
+		username = $("#username").val();
+		if (username == "") {
+			alert("昵称不能为空!");
+			
+		} else {
+			var joinMsg = {};
+			joinMsg.type="join";
+			joinMsg.name=username;
+			var msg=JSON.stringify(joinMsg);
+			socket.send(msg);	
+		}
 	});
 });

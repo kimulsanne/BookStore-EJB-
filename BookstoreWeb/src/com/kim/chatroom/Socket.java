@@ -19,38 +19,26 @@ public class Socket {
 
     static Map<String,Session> sessionMap = new Hashtable<String,Session>();
     static Set<String> users = new HashSet<String>();
+    
     @OnOpen
     public void onOpen(Session session) {
     	sessionMap.put(session.getId(), session);
-    	//broadcastAll("message",)
     }
 
     @OnMessage
     public void onMessage(String unscrambledWord, Session session) {
-    	System.out.println(unscrambledWord);
     	broadcastAll("message",unscrambledWord);
-    }                                                                                                                                                  
+    }    
+    
     /**
      * 广播给所有人
      * @param message
      */
     public static void broadcastAll(String type,String message){
-    	JSONObject jsonObject = JSONObject.fromObject(message);
-    	Message msg = (Message) JSONObject.toBean(jsonObject, Message.class);
-    	String text = "";
-    	if (msg.getType().equals("chat")) {   		
-    		text = "{type:'"+msg.getType() + "',name:'"+ msg.getName() + "',msg:'"+msg.getMsg() + "'}";
-    	}
-    	else if (msg.getType().equals("join")) {
-    		text = "{type:'"+msg.getType() + "',name:'"+ msg.getName() + "'}";
-    		users.add(msg.getName());
-    	}
         Set<Map.Entry<String,Session>> set = sessionMap.entrySet();
         for(Map.Entry<String,Session> i: set){
             try {
-            	//System.out.println(text);
-            	i.getValue().getBasicRemote().sendText(message);
-            	//i.getValue().getBasicRemote().sendText("{type:'"+type+"',text:'"+message+"'}");
+            	i.getValue().getBasicRemote().sendText(message);           	
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -58,10 +46,8 @@ public class Socket {
     }
 
     @OnClose
-    public void onClose(Session session, CloseReason closeReason) {
-    	
-    	sessionMap.remove(session.getId());
-        
+    public void onClose(Session session, CloseReason closeReason) {    	
+    	sessionMap.remove(session.getId());    
     	logger.info(String.format("Session %s closed because of %s", session.getId(), closeReason));
     }
     

@@ -8,10 +8,8 @@ $(document).ready(function() {
 			type:'post',
 			data:params,
 			success:function(data){
-				var d = JSON.parse(data);	
-				//showinfo(d);
-				
-				 
+				var d = JSON.parse(data);
+				alert(data);
 				showinfo(btn, d);
 					
 	        },

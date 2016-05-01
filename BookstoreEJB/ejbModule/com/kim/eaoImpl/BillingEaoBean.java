@@ -22,7 +22,6 @@ public class BillingEaoBean implements BillingEao {
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addBilling(Billing billing) {
-		
 		em.persist(billing);
 		em.flush();	
 	}

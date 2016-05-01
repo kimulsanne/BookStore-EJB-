@@ -25,17 +25,14 @@ public class BillingServiceBean implements MessageListener {
 
 	@Override
 	public void onMessage(Message msg) {
-
 		try {
 			System.out.println("收到消息!");
-			ObjectMessage message = (ObjectMessage)msg;
-			
+			ObjectMessage message = (ObjectMessage)msg;			
 			Billing billing = (Billing)message.getObject();
 			if (billing != null)
 				billingEao.addBilling(billing);		
 			
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
+		} catch (JMSException e) {			
 			e.printStackTrace();
 		}
 		

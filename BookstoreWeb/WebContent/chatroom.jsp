@@ -25,8 +25,6 @@
 
 	<%
 		User user = (User) session.getAttribute("user");
-		String name = user.getUsername();
-		String id = (String) request.getParameter("id");
 	%>
 
 	<div class="container-fluid">
@@ -66,12 +64,21 @@
 			</div>
 			
 			<div class="col-lg-5">
-				<div id="user" class="<%=name%>"></div>
 				<h3>聊天信息:</h3>
-				<button type="submit" id="joinButton" class="btn btn-info">加入聊天室</button>	
-				<textarea id="textarea" class="form-control" rows="20" ></textarea>
+				<div class="form-inline">
+  					<div class="form-group">
+      					<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+     					 <div class="input-group">
+ 
+      						<input type="text" class="form-control" id="username" placeholder="请输入昵称">
+        					
+      					</div>
+    				</div>
+  					<button type="submit" id="joinButton" class="btn btn-primary">加入聊天室</button>
+				</div>									
+				<textarea id="textarea" class="form-control" rows="20" disabled="true"></textarea>
 				<input type="text" class="form-control" id="msg" placeholder="请输入内容">		      						
-    			<button type="submit" id="sendButton" class="btn btn-primary">发送</button>				
+    			<button type="submit" id="sendButton" class="btn btn-primary" disabled="true">发送</button>				
     		</div>
 			<div class="col-lg-2">
     			<h3>用户列表:</h3>
